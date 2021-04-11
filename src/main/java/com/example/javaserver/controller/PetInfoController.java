@@ -41,7 +41,7 @@ public class PetInfoController {
     }
 
     @GetMapping("/api/pet/{pid}")
-    public List<PetInfo> findPetForId(@PathVariable("pid") Long petId) {
+    public PetInfo findPetForId(@PathVariable("pid") Long petId) {
         return service.findPetForId(petId);
     }
 

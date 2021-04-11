@@ -52,14 +52,14 @@ public class LoginRegisterService {
         return result;
     }
 
-    public List<LoginRegister> findUserByUid(Long uid) {
-        List<LoginRegister> us = new ArrayList<LoginRegister>();
+    public LoginRegister findUserByUid(Long uid) {
+        LoginRegister result = new LoginRegister(null,"","","","","","");
         for(LoginRegister u:users) {
             if(u.getUserId().equals(uid)) {
-                us.add(u);
+                result = u;
             }
         }
-        return us;
+        return result;
     }
 
     public Integer deleteUser(Long userId) {

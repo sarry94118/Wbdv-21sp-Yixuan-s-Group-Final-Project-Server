@@ -47,14 +47,14 @@ public class PetInfoService {
 
     public List<PetInfo> findAllPets(){return pets;}
 
-    public List<PetInfo> findPetForId(Long pid) {
-        List<PetInfo> pt = new ArrayList<>();
+    public PetInfo findPetForId(Long pid) {
+        PetInfo result = new PetInfo(null, null, "", "", "", null, "", null, null, "", "", "", "");
         for(PetInfo p:pets) {
             if(p.getPetId().equals(pid)) {
-                pt.add(p);
+               result = p;
             }
         }
-        return pt;
+        return result;
     }
 
 

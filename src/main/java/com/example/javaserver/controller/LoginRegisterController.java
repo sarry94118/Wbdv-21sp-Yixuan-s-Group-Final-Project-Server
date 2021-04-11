@@ -37,7 +37,7 @@ public class LoginRegisterController {
     }
 
     @GetMapping("/api/users/userid/{uid}")
-    public List<LoginRegister> findUserByUid(@PathVariable("uid") Long uid) {
+    public LoginRegister findUserByUid(@PathVariable("uid") Long uid) {
         return service.findUserByUid(uid);
     }
 
