@@ -1,6 +1,12 @@
 package com.example.javaserver.models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="users")
 public class LoginRegister {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String username;
     private String password;
@@ -77,4 +83,13 @@ public class LoginRegister {
 
     public LoginRegister() {
     }
+
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//
+//    @Id
+//    public Long getId() {
+//        return id;
+//    }
 }

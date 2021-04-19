@@ -1,8 +1,6 @@
 package com.example.javaserver.controller;
 
-import com.example.javaserver.models.LoginRegister;
 import com.example.javaserver.models.PetInfo;
-import com.example.javaserver.services.LoginRegisterService;
 import com.example.javaserver.services.PetInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

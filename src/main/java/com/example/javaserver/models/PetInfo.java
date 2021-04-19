@@ -1,6 +1,12 @@
 package com.example.javaserver.models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="pets")
 public class PetInfo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long petId;
     private Long userId;
     private String breed;
@@ -14,6 +20,17 @@ public class PetInfo {
     private String description;
     private String city;
     private String zipcode;
+    private String state;
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+
 
     public String getCity() {
         return city;
@@ -119,7 +136,7 @@ public class PetInfo {
         this.description = description;
     }
 
-    public PetInfo(Long petId, Long userId, String breed, String name, String gender, Integer age, String image, Integer width, Integer height, String status, String description, String city, String zipcode) {
+    public PetInfo(Long petId, Long userId, String breed, String name, String gender, Integer age, String image, Integer width, Integer height, String status, String description, String city, String zipcode, String state) {
         this.petId = petId;
         this.userId = userId;
         this.breed = breed;
@@ -133,6 +150,7 @@ public class PetInfo {
         this.description = description;
         this.city = city;
         this.zipcode = zipcode;
+        this.state = state;
     }
 
     public PetInfo() {
