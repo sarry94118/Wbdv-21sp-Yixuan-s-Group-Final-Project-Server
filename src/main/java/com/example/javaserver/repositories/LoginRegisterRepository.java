@@ -13,4 +13,10 @@ public interface LoginRegisterRepository extends CrudRepository<LoginRegister, L
 
     @Query(value="SELECT * FROM users WHERE user_id=:ud", nativeQuery = true)
     public LoginRegister findUserByUid(@Param("ud") Long uid);
+
+    //added by Meng Wang
+    @Query(value = "SELECT * FROM users WHERE username=:uname AND password=:pass", nativeQuery = true)
+    public LoginRegister findUserByCredentials(
+            @Param("uname") String username,
+            @Param("pass") String password);
 }

@@ -6,6 +6,7 @@ import com.example.javaserver.repositories.LoginRegisterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,6 +42,43 @@ public class LoginRegisterService {
 //        user.setUserId((new Date()).getTime());
 //        users.add(user);
 //        return user;
+    }
+
+    //added by Meng Wang
+    public LoginRegister register(LoginRegister credentials, HttpSession session){
+        LoginRegister existingUser = repository.findUserByUsername(credentials.getUsername());
+        if(existingUser == null) {
+            System.out.println("can't find user,  ready to create");
+            LoginRegister newUser = repository.save(credentials);
+            session.setAttribute("profile", newUser);
+            return newUser;
+        }
+        System.out.println("find user, can't create");
+        return new LoginRegister();
+    }
+
+    //added by Meng Wang
+    public LoginRegister createUserWithoutLogin(LoginRegister credentials){
+        LoginRegister existingUser = repository.findUserByUsername(credentials.getUsername());
+        if(existingUser == null) {
+            System.out.println("can't find user,  ready to create");
+            LoginRegister newUser = repository.save(credentials);
+            return newUser;
+        }
+        System.out.println("find user, can't create");
+        return new LoginRegister();
+    }
+
+    //added by Meng Wang
+    public LoginRegister login(LoginRegister credentials, HttpSession session){
+        LoginRegister existingUser = repository.findUserByCredentials(credentials.getUsername(), credentials.getPassword());
+        if(existingUser != null) {
+            System.out.println("find user, ready to login");
+            session.setAttribute("profile", existingUser);
+            return existingUser;
+        }
+        System.out.println("can't find user");
+        return new LoginRegister();
     }
 
     public List<LoginRegister> findAllUsers() {

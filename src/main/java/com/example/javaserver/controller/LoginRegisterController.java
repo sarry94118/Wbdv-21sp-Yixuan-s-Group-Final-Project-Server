@@ -4,10 +4,12 @@ import com.example.javaserver.services.LoginRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = "https://petfindersearchlogin.herokuapp.com", allowCredentials = "true")
 public class LoginRegisterController {
     @Autowired
     LoginRegisterService service;
@@ -18,6 +20,50 @@ public class LoginRegisterController {
             @RequestBody LoginRegister user) {
         return service.createUser(user);
 //        return service.createUser(username, user);
+    }
+
+    //added by Meng Wang
+    @PostMapping("/api/users/register")
+    public LoginRegister register(
+            @RequestBody LoginRegister credentials, HttpSession session) {
+        return service.register(credentials, session);
+    }
+
+    //added by Meng Wang
+    @PostMapping("/api/users/create")
+    public LoginRegister createUserWithoutLogin(
+            @RequestBody LoginRegister credentials) {
+        return service.createUserWithoutLogin(credentials);
+    }
+
+    //added by Meng Wang
+    @PostMapping("/api/users/login")
+    public LoginRegister login(
+            @RequestBody LoginRegister credentials,
+            HttpSession session
+    ) {
+        return service.login(credentials, session);
+    }
+
+    //added by Meng Wang
+    @PostMapping("/api/users/profile")
+    public LoginRegister getCurrentUserFromSession(HttpSession session) {
+//        LoginRegister currentUser = (LoginRegister)session.getAttribute("profile");
+//        return currentUser;
+        if(session.getAttribute("profile") != null){
+            LoginRegister currentUser = (LoginRegister)session.getAttribute("profile");
+            System.out.println("server: currentUser=" +  currentUser.getUsername());
+            return currentUser;
+        }else{
+            System.out.println("server: currentUser is null");
+            return new LoginRegister();
+        }
+    }
+
+    //added by Meng Wang
+    @PostMapping("/api/users/logout")
+    public void logout(HttpSession session) {
+        session.invalidate();
     }
 
 
