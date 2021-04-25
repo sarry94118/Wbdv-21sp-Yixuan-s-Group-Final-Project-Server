@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @CrossOrigin(origins = "https://petfindersearchlogin.herokuapp.com", allowCredentials = "true")
+//@CrossOrigin(origins = "*")
 public class LoginRegisterController {
     @Autowired
     LoginRegisterService service;
