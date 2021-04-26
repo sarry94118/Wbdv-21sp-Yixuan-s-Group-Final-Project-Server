@@ -8,9 +8,9 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
-@CrossOrigin(origins = "https://petfindersearchlogin.herokuapp.com", allowCredentials = "true")
-//@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+//@CrossOrigin(origins = "https://petfindersearchlogin.herokuapp.com", allowCredentials = "true")
+//@CrossOrigin(origins = "*", allowCredentials = "true")
 public class LoginRegisterController {
     @Autowired
     LoginRegisterService service;
