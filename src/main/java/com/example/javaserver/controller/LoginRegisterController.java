@@ -1,6 +1,8 @@
 package com.example.javaserver.controller;
 import com.example.javaserver.models.LoginRegister;
+import com.example.javaserver.models.PetInfo;
 import com.example.javaserver.services.LoginRegisterService;
+import com.example.javaserver.services.PetInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,12 +10,15 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000","https://petfindersearchlogin.herokuapp.com"}, allowCredentials = "true")
-//@CrossOrigin(origins = "https://petfindersearchlogin.herokuapp.com", allowCredentials = "true")
-//@CrossOrigin(origins = "*", allowCredentials = "true")
+//@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = {"https://petfindersearchlogin.herokuapp.com", "http://localhost:3000"}, allowCredentials = "true")
+//@CrossOrigin(origins = "*")
 public class LoginRegisterController {
     @Autowired
     LoginRegisterService service;
+
+    @Autowired
+    PetInfoService petService;
 
     @PostMapping("/api/users/username/{username}")
     public LoginRegister createUser(
@@ -91,6 +96,10 @@ public class LoginRegisterController {
     @DeleteMapping("/api/users/userid/{uid}")
     public Integer deleteUser(
             @PathVariable("uid")Long userId) {
+        List<PetInfo> petList = petService.findPetForUser(userId);
+        for(PetInfo pet : petList){
+            petService.deletePet(pet.getPetId());
+        }
         return service.deleteUser(userId);
 
     }
